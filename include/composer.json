@@ -1,0 +1,23 @@
+{
+    "name": "dealers/invitereader",
+    "description": "Read invitation QR Code reader",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Dealers\\Invitereader\\": "src/"
+        },
+        "files": [
+            "src/database/connection.php",
+            "src/leads.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "castroitalosdealers",
+            "email": "italo@simpledealers.com.br"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

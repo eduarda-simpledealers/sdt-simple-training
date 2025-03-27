@@ -1,0 +1,18 @@
+{
+    "name": "Sipmle training",
+    "description": "Simple Training",
+    "autoload": {
+        "psr-4": {
+            "Dexp\\Dinauto\\Dashboard\\": "dashboard/"
+        }
+    },
+    "authors": [
+        {
+            "name": "castroitalosdealers",
+            "email": "italo@simpledealers.com.br"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "*"
+    }
+}

@@ -1,0 +1,699 @@
+html{
+    background-color: var(--main-background) !important;
+}
+*{
+    /* font-family: var(--main-font) !important; */
+    font-family: var(--main-font);
+}
+a{
+    text-decoration: none;
+}
+.text-bg-info{
+    color: var(--main-font-color-light) !important;
+}
+.text-black{b
+    color: var(--main-font-color-dark) !important;
+}
+.containerPontuacao{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    padding-left: 0.5rem;
+    border-left: 2px dashed var(--main-border-color) !important;
+}
+
+.gameTitle{
+    display: flex;
+    align-items: normal;
+    justify-content: center;
+    gap: 5px;
+}
+
+.gameTitle i{
+    font-size: 15px !important;
+}
+
+#painelPontuacao{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    padding-bottom: 1em;
+    border-bottom: 2px dashed var(--main-border-color) !important;
+    max-height: 130px;
+}
+
+#totalPontuacao{
+        position: relative;
+        text-align: center;
+        font-size: 77px;
+}
+
+#totalAgendamentos{
+    bottom: -8px;
+    font-size: 53px;
+    position: relative;
+}
+
+.text-bg-info{
+    background-color: var(--main-color) !important;
+    border-radius: 15px;
+}
+.cover-event{
+    padding: 0;
+    height: 100vh;
+}
+.cover-bg{
+    width: 100%;
+    background: var(--main-background-img) !important;
+    background-size: cover !important;
+    filter: brightness(0.3);
+    height: 100vh;
+}
+
+.form-select{
+    background-color: #f3f3f3;
+    border-color: transparent;
+    color: #545454;
+    font-size: 0.875rem;
+    padding: 12px;
+}
+
+.form-select:focus {
+    border-color: var(--main-background) !important;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgb(42 42 42 / 25%);
+}
+
+.form-game-container{
+    padding: 1% 3% 2%;
+    background-image: url(../img/carros/f1.png) !important;
+    background-size: 100% !important;
+    background-repeat: no-repeat !important;
+    background-position-y: bottom !important;
+}
+/*.form-game-container:after{*/
+/*    content: '';*/
+/*    height: 872px;*/
+/*    width: 200px;*/
+/*    display: block;*/
+/*    background: #ffffff;*/
+/*    position: absolute;*/
+/*    right: 764px;*/
+/*    rotate: 1.5222deg;*/
+/*    top: -4px;*/
+/*    clip-path: polygon(20% -10%, 60% 0%, 70% 92%, -50% -80%);*/
+/*    z-index: 0;*/
+/*}*/
+/*.form-game-container:before{*/
+/*    content:'';*/
+/*}*/
+.logo-event{
+    display: none;
+    margin: 0px 0 35px;
+}
+.card{
+    height: 150px;
+}
+.card-title{
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--main-background);
+}
+.form-game-container i{
+    font-size: 30px;
+    color: var(--main-color) !important;
+}
+.form-game-container .form{
+    margin-bottom: 15px;
+}
+.titles{
+    text-transform: uppercase;
+}
+.titles .color{
+    padding-bottom: 10px;
+}
+.titles .text-white{
+    margin-bottom: 0;
+}
+.uptitle{
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.subtitle{
+    font-size: 11px;
+    margin-bottom: -30px;
+    text-transform: uppercase;
+}
+.color{
+    color: var(--main-color);
+}
+
+button{
+    border: 0;
+}
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: normal;
+    align-content: normal;
+  }
+
+  .flex-items:nth-child(1) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+  }
+
+  .flex-items:nth-child(2) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+  }
+  .flex-items span{
+    font-size: 10px;
+    font-weight: 500;
+  }
+  .f20{
+    font-size: 20px !important;
+    vertical-align: sub;
+  }
+  .btn-evento{
+    background-color: var(--main-color) !important;
+    border-radius: 5px;
+    color: var(--main-font-color-dark) !important;
+    display: block;
+    border: none;
+    padding: 15px 35px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.btn:hover{
+ border-color: transparent !important;
+}
+.btn-evento:hover{
+    background-color: var(--main-color) !important;
+    border-radius: 5px;
+    color: var(--main-font-color-dark) !important;
+    display: block;
+    border: none;
+    padding: 15px 35px;
+    margin: 0 auto;
+    width: 100%;
+}
+.btn-evento:active{
+    background-color: var(--main-color) !important;
+    border-radius: 5px;
+    color: var(--main-font-color-dark) !important;
+    display: block;
+    border: none;
+    padding: 15px 35px;
+    margin: 0 auto;
+    width: 100%;
+}
+.btn-evento:focus{
+    background-color: var(--main-color) !important;
+    border-radius: 5px;
+    color: var(--main-font-color-dark) !important;
+    display: block;
+    border: none;
+    padding: 15px 35px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.modal-backdrop{
+    --bs-backdrop-opacity: 1;
+    --bs-backdrop-bg: #fff;
+}
+.modal-content, .modal-footer{
+    border: none;
+}
+.form-floating>label{
+    left: 5px;
+}
+.modal-uploads{
+    display: block;
+    border: none;
+}
+.modal-uploads .btn-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.big-title{
+    font-size: 25px;
+    padding: 10px 0;
+    font-weight: 600;
+}
+.hashtag-shadow{
+    text-shadow: -4px 1px var(--main-color);
+    font-weight: 600;
+    float: right;
+    display: contents;
+}
+
+
+.wrapper:active .img-result {
+    margin-top: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.wrapper .img-result {
+    cursor: pointer;
+    margin: 10px auto 15px;
+    position: relative;
+    background: #fff;
+    border: solid 6px #000000;
+    background-size: cover;
+    background-position: center;
+    display: block;
+    width: 100%;
+    height: 300px;
+    border-radius: 40px;
+    box-shadow: none;
+    color: rgba(0, 0, 0, 0);
+    transition: box-shadow .3s, margin .3s, background-image 1.5s;
+}
+
+.wrapper .img-result.no-image:before {
+    font-family: 'Font Awesome 5 Pro';
+    content: "\f093";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: #000000;
+    font-size: 80px;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    text-shadow: -2px 0px var(--main-color);
+}
+
+.wrapper button {
+    margin-top: 20px;
+    background: #858585;
+    width: 100%;
+    border: none;
+    color: var(--main-font-color-light) !important;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.wrapper button:active {
+    box-shadow: none;
+    margin-top: 24px;
+    padding: 8px;
+}
+
+.show-button {
+    background: #fff;
+    border: none;
+    color: var(--main-font-color-light) !important;
+    padding: 10px 20px;
+    float: right;
+    display: none;
+}
+.footer-logo{
+    position: absolute;
+    bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    right: 14%;
+}
+
+@media screen and (max-width:1920px){ 
+    .form-game-container:after{
+        right: 810px !important;
+    }
+    .form-game-container{
+        padding: 1% 2% 2%;
+        zoom: .9;
+    }
+    .cover-bg{
+        background-position-x: 66% !important;
+    }
+}
+@media screen and (max-width:1600px){ 
+    .col-lg-4{
+        width: 41.66666667% !important;
+    }
+    .col-lg-8{
+        width: 58.33333333% !important;
+    }
+    .form-game-container{
+        zoom: .7;
+    }
+
+    .logo-cover{
+        left: 12% !important;
+        top: 30% !important;
+    }
+
+    .logo-cover img{
+        width: 100%;
+    }
+}
+@media screen and (max-width:1250px){
+    .col-lg-4{
+        width: 50% !important;
+    }
+    .col-lg-8{
+        width: 50% !important;
+    }
+}
+@media screen and (max-width:1024px){
+    .form-game-container:after{
+        display: none !important;
+    }
+    .footer-logo{
+        margin-left: auto !important;
+        margin-right: auto !important;
+        right: 0 !important;
+        left: 0 !important;
+        text-align: center !important;
+    }
+    .col-lg-4{
+        width: 100% !important;
+    }
+    .col-lg-8{
+        display: none;
+    }
+    .logo-event{
+        display: block !important;
+    }
+    .logo-event img{
+        margin: 0 auto;
+        display: block;
+    }
+
+    .logo-cover{
+        display: none;
+    }
+
+    .form-game-container{
+        padding: 20px;
+        height: 135vh;
+    }
+
+    .gameTitle i{
+        display: none !important;
+    }
+}
+ @media screen and (max-width:578px){
+    .card-title{
+        font-size:10px;
+    }
+
+    
+    .descubra-title{
+        font-size: 8px;
+    }
+ } 
+
+
+ .w100{
+    width: 100%;
+    display: none;
+ }
+ button.btn-success div:nth-child(1){
+    display: none;
+ }
+ button.btn-success div:nth-child(2){
+    display: block !important;
+ }
+ button.btn-success{
+    background: #fff !important;
+ }
+ .check-ponto i{
+    padding-top: 35px;
+    color:var(--main-color) !important;
+ }
+ .check-ponto i{
+    font-size: 45px;
+ }
+ .ponto{
+    font-size: 10px;
+    color: var(--main-color) !important;
+ }
+
+#atividades{
+    padding-bottom: 25px;
+}
+.logo-dealers img{
+        padding: 40px 45px;
+}
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl{
+        background: var(--main-background) !important;
+
+}
+
+.logo-cover{
+    position: absolute;
+    z-index: 1;
+    width: 35%;
+    left: 14%;
+    top: 30%;
+}
+
+input::placeholder, textarea::placeholder{
+    color: #999;
+    font-size: 12px;
+}
+
+.modalSubtitle{
+    margin-bottom: 2rem;
+    font-size: .825rem;
+    padding-bottom: 1rem;
+    margin-top: -20px;
+    color: #999;
+    font-weight: 300;
+    border-bottom: 1px solid #8a8a8a6e;
+}
+
+.modal-header{
+    border-bottom: transparent;
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--main-color) !important;
+    --bs-btn-border-color: var(--main-color) !important;
+    --bs-btn-hover-bg:  var(--main-color) !important;
+    --bs-btn-hover-border-color:  var(--main-color) !important;
+    --bs-btn-active-bg:  var(--main-color) !important;
+    --bs-btn-active-border-color:  var(--main-color) !important;
+    --bs-btn-disabled-bg: var(--main-color) !important;
+    --bs-btn-disabled-border-color: var(--main-color) !important;
+}
+
+.modal-footer{
+    flex-wrap: nowrap !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+.form-select{
+    --bs-form-select-bg-img:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/></svg>") !important;
+}
+
+
+.btn[disabled] {
+    cursor: not-allowed;
+}
+
+.text-main-color {
+    color: var(--main-color) !important;
+}
+
+.bg-main-color {
+    background-color: var(--main-color) !important;
+}
+
+.logo-marca {
+    width: 100%;
+    max-width: 160px;
+    height: 100%;
+    margin: 0px auto;
+}
+
+.dealer-area{
+    background: #ffffff12;
+    padding: 30px 25px;
+    margin: 5px -42px 30px -42px;
+    border-radius: 10px;
+}
+.dealer-area button{
+    height: auto;
+}
+.btn-acesso-leads{
+    width: 100%;
+    background: #00000000 !important;
+    border: solid 3px var(--main-color) !important;
+}
+.btn-acesso-leads:hover{
+    background: #00000000 !important;
+    border: solid 3px var(--main-color) !important;
+}
+.btn-ranking{
+    width: 100%;
+    background: #00000000 !important;
+    border: solid 3px #ff5600 !important;
+}
+.btn-ranking:hover{
+    background: #00000000 !important;
+    border: solid 3px #ff5600 !important;
+}
+.card-dealer-area{
+    display: flex;
+    flex-direction: row;
+}
+.card-dealer-area i{
+    padding-right: 15px;
+    font-size: 38px;
+}
+.card-dealer-area h2{
+    color: #ff5600 !important;
+}
+.card-dealer-area i{
+    color: #0828fd;
+}
+.dealer-area span{
+    background: var(--main-color);
+    color: var(--main-background);
+    border-radius: 5px;
+    padding: 2px 10px;
+    position: absolute;
+    right: 20px;
+    top: 23px;
+}
+@media (min-width:1601px){
+    .dealer-area{
+        zoom: .7 !important;
+    }
+}
+@media (max-width:1440px){
+    .cover-img{
+    width: 160% !important;
+    }
+    .dealer-area{
+    margin: auto !important;
+    }
+}
+@media screen and (max-width:431px){
+    .dealer-area .col-md-6{
+        padding: 3px !important;
+    }
+    .card-dealer-area{
+        padding: 10px 0 0 !important;
+        padding-bottom: 0 !important;
+    }
+    .dealer-area{
+        padding: 20px 5px !important;
+    }
+    .card-dealer-area .card-title{
+        font-size: 10px !important;
+    }
+    .card-dealer-area i {
+        padding-right: 15px;
+        font-size: 22px !important;
+    }
+    .card-title {
+        font-size: 12px;
+    }
+    .dealer-area span{
+        top: -15px !important;
+    }
+    .simplecard-button .h2{
+        font-size: 10px !important;
+    }
+    #totalPontuacao{
+        font-size: 57px;
+    }
+    .dealer-area{
+        background: #16161600 !important;
+    }
+    .form-game-container i{
+        font-size: 15px;
+    }
+}
+.cover-img{
+    width: 100% !important;
+    filter: invert(1);
+}
+.modal-title{
+    font-weight: bold;
+}
+.modal-footer>*{
+    width: 100%;
+}
+
+.pulsedealers {
+    -webkit-animation: DealersPulse 1.5s infinite;
+    animation: DealersPulse 1.5s infinite;
+    transition: all 0.3s ease;
+    border-width: 0px;
+    border-color: var(--main-color);
+    border-style: solid;
+    text-align: center;
+}
+
+.pulsedealers:hover {
+    cursor: pointer;
+    -webkit-animation: none;
+    animation: none;
+}
+
+@-webkit-keyframes DealersPulse {
+    0% {
+        box-shadow: 0 0 0 0px var(--main-color);
+    }
+    100% {
+        box-shadow: 0 0 0 20px transparent;
+    }
+}
+
+@keyframes DealersPulse {
+    0% {
+        box-shadow: 0 0 0 0px var(--main-color);
+    }
+    100% {
+        box-shadow: 0 0 0 20px transparent;
+    }
+}
+.button-action{
+    background: var(--main-color) !important;
+}
+.button-action:hover{
+    background: var(--main-color) !important; 
+}
+
+.padding-15{
+    padding: 15px 0;
+}
+.text-blue{
+    color: #0828fd !important;
+}
+.text-orange{
+    color: #ff5600 !important;
+}
+button:active{
+    transform: scale(0.9); /* Diminui ligeiramente o tamanho */
+    filter: brightness(0.9); /* Escurece para simular profundidade */
+}
+.btn-agendar{
+    background: linear-gradient(121deg, rgb(241 62 0) 8%, rgb(255 109 0) 100%) !important;
+}

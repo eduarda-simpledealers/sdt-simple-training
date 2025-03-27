@@ -1,1 +1,2 @@
-# sdt-simple-training
+# SIMPLE TRAINING
+

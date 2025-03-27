@@ -1,0 +1,62 @@
+@font-face {
+    font-family: icomoon;
+    font-display: auto;
+    src: url(icomoon.eot?x3ba1v);
+    src: url(icomoon.eot?x3ba1v#iefix) format("embedded-opentype"), url(icomoon.ttf?x3ba1v) format("truetype"), url(icomoon.woff?x3ba1v) format("woff"), url(icomoon.svg?x3ba1v#icomoon) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: F1;
+    font-display: auto;
+    src: url(Formula1-Regular.woff2) format("woff2"), url(Formula1-Regular.woff) format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: F1;
+    font-display: auto;
+    src: url(Formula1-Italic.woff2) format("woff2"), url(Formula1-Italic.woff) format("woff");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: F1Bold;
+    font-display: auto;
+    src: url(Formula1-Bold.woff2) format("woff2"), url(Formula1-Bold.woff) format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: F1Black;
+    font-display: auto;
+    src: url(Formula1-Black.woff2) format("woff2"), url(Formula1-Black.woff) format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: F1Wide;
+    font-display: auto;
+    src: url(Formula1-Wide.woff2) format("woff2"), url(Formula1-Wide.woff) format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: F1YEAR;
+    font-display: auto;
+    src: url(F1YEARRegular.woff2) format("woff2"), url(F1YEARRegular.woff) format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
