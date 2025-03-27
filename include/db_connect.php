@@ -20,9 +20,8 @@ $table_base_leads                      = $config['table_base_leads'];
 $table_historico_status_base_leads     = $config['table_historico_status_base_leads'];
 
 $dominioEvento     = "evento.dexp.online";
-$nomeEvento     = "Evento DEXP Simple Dealerss";
+$nomeEvento     = "Evento DEXP Simple Dealers";
 // $enderecoEvento     = "-";
-$duotalk = "https://api.duotalk.io/p/campaign/send/67597cd9c5bebd4d42dcff6f/dqBskxfgXKrPjqBoVXQdWT?chatbot=65aabb2379a248fe39d8acab&360Dialog=true&NOME_ATENDENTE=Daniel%20Marques&intention=Envio%20de%20Convite&provider=3&sendToOpen=1&providerName=Simple%20Dealers";
 
 try {
     // Conexão usando constantes definidas acima

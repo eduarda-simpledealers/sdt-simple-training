@@ -9,7 +9,7 @@ if (ENVIRONMENT === 'sandbox') {
     $config['DB_HOST'] = '35.194.32.21';
     $config['DB_USER'] = 'master';
     $config['DB_PASSWORD'] = 'adYiDReRRChxfZAD';
-    $config['DB_NAME'] = 'dexp_boa_terra_11_2024';
+    $config['DB_NAME'] = 'dexp_simpledealers';
 
     // Nomes das tabelas
     $config['table_usuarios']= 'usuarios';
@@ -45,7 +45,7 @@ if (ENVIRONMENT === 'sandbox') {
     $config['DB_HOST'] = 'localhost';
     $config['DB_USER'] = 'dealers';
     $config['DB_PASSWORD'] = 'dealers';
-    $config['DB_NAME'] = 'dexp_game';
+    $config['DB_NAME'] = 'dexp_simpledealers';
 
     $config['table_usuarios']= 'Usuarios';
     $config['table_concessionaria']= 'Concessionaria';

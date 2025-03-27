@@ -88,10 +88,6 @@ if ($status_evento == 'Encerrado') {
     <meta property="og:image" content="https://<?php echo $dominioEvento ?>/assets/img/og.png?<?php echo date('h:m:s'); ?>" />
     <meta property="og:url" content="<?php echo $dominioEvento ?>" />
 
-
-
-    <link rel="icon" href="<?php echo $marca_config['favicon']; ?>">
-
     <style>
         :root {
             --main-color: <?php echo $marca_config['color']; ?> !important;

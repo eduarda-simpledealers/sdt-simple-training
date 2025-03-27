@@ -125,157 +125,6 @@ function normalizarTelefone($raw_telefone)
 function getMarcaConfig($marca)
 {
     $configs = [
-        'BYD' => [
-            'background' => '#000',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/background.jpg',
-            'color' => '#409EFF',
-            'logo'  => 'assets/img/marcas/byd.svg'
-        ],
-        'Honda' => [
-            'background' => '#000',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/background.jpg',
-            'color' => '#CC0000',
-            'logo'  => 'assets/img/marcas/honda.svg'
-        ],
-        'Nissan' => [
-            'background' => '#000',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/background.jpg',
-            'color' => '#A61922',
-            'logo'  => 'assets/img/marcas/nissan.svg'
-        ],
-        'Volkswagen' => [
-            'background' => '#0054a5',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/background.jpg',
-            'background_video' => 'assets/video/nivus.webm',
-            'color' => '#fff',
-            'logo'  => 'assets/img/marcas/volkswagen.svg',
-            'favicon'  => 'assets/img/marcas/volkswagen.svg'
-        ],
-        'Chevrolet' => [
-            'background' => '#000',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/background.jpg',
-            'color' => '#CD9834',
-            'logo'  => 'assets/img/marcas/chevrolet.svg'
-        ],
-        'Jeep' => [
-            'background' => '#000',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/background.jpg',
-            'color' => '#ffba00',
-            'logo'  => 'assets/img/marcas/jeep.svg'
-        ],
-        'Fiat' => [
-            'background' => '#000934',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/bg-capa.jpg?cache',
-            'color' => '#F41F2D',
-            'logo'  => 'assets/img/marcas/fiat.svg'
-        ],
-        'RAM' => [
-            'background' => '#000',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/background.jpg',
-            'color' => '#b0a477',
-            'logo'  => 'assets/img/marcas/ram.svg'
-        ],
-        'Renault' => [
-            'background' => '#000',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/background.jpg',
-            'color' => '#EEDE00',
-            'logo'  => 'assets/img/marcas/renault.svg'
-        ],
-        'Mercedes' => [
-            'background' => '#000',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/bg-mercedes.jpeg',
-            'color' => '#fff',
-            'logo'  => 'assets/img/evento/ab-mercedes.png',
-            'favicon'  => 'assets/img/marcas/favicon-mercedes.jpg'
-        ],
-        'Volvo' => [
-            'background' => '#000',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/bg-volvo.jpg',
-            'background_video' => 'assets/video/volvo.webm',
-            'color' => '#fff',
-            'logo'  => 'assets/img/marcas/volvo.svg?ca',
-            'favicon'  => 'assets/img/marcas/favicon-volvo.jpg'
-        ],
-        'GWM' => [
-            'background' => '#fff',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#82828242',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/bg.jpg',
-            'background_video' => 'assets/video/gwm.webm?cache',
-            'color' => '#0828fd',
-            'logo'  => 'assets/img/marcas/gwm.svg?caches',
-            'favicon'  => 'assets/img/marcas/gwm.svg'
-        ],
-        'Multimarcas' => [
-            'background' => '#cc092f',
-            'font_color_light' => '#fff',
-            'font_color_dark' => '#000',
-            'border_color' => '#ffffff38',
-            'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
-            'font' => 'Peugeot',
-            'background_img' => '../img/evento/bg.jpg?cache',
-            'color' => '#fff',
-            'logo'  => '',
-            'favicon'  => 'assets/img/evento/favicon.ico'
-        ],
         'SimpleDealers' => [
             'background' => '#fff',
             'font_color_light' => '#fff',
@@ -292,15 +141,17 @@ function getMarcaConfig($marca)
     ];
 
     return $configs[$marca] ?? [
-        'background' => '#000',
+        'background' => '#fff',
         'font_color_light' => '#fff',
         'font_color_dark' => '#000',
         'border_color' => '#82828242',
         'link_font' => 'https://simplecard.online/bc/fonts/peugeot/stylesheet.css',
         'font' => 'Peugeot',
-        'background_img' => '../img/default.jpg',
-        'color' => '#B52C01',
-        'logo'  => 'assets/img/marcas/default.svg'
+        'background_img' => '../img/evento/bg.jpg',
+        'background_video' => 'assets/video/evento.webm?cache',
+        'color' => '#ff5600',
+        'logo'  => 'assets/img/evento/dexp-icon.png?q',
+        'favicon'  => 'assets/img/evento/dexp-icon.png?q'
     ];
 }
 

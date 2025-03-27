@@ -1,2 +1,5 @@
 /vendor
 .user.ini
+
+/include/vendor
+/include/.env

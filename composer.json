@@ -1,5 +1,5 @@
 {
-    "name": "Sipmle training",
+    "name": "simpletraining",
     "description": "Simple Training",
     "autoload": {
         "psr-4": {
