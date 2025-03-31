@@ -126,7 +126,7 @@ function getMarcaConfig($marca)
 {
     $configs = [
         'SimpleDealers' => [
-            'background' => '#fff',
+            'background' => '#fdfdff',
             'font_color_light' => '#fff',
             'font_color_dark' => '#000',
             'border_color' => '#82828242',
@@ -141,7 +141,7 @@ function getMarcaConfig($marca)
     ];
 
     return $configs[$marca] ?? [
-        'background' => '#fff',
+        'background' => '#fdfdff',
         'font_color_light' => '#fff',
         'font_color_dark' => '#000',
         'border_color' => '#82828242',

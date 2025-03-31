@@ -89,7 +89,7 @@ if ($status_evento == 'Encerrado') {
     <meta property="og:url" content="<?php echo $dominioEvento ?>" />
 
     <style>
-        :root {
+          :root {
             --main-color: <?php echo $marca_config['color']; ?> !important;
             --main-background: <?php echo $marca_config['background']; ?> !important;
             --main-font: <?php echo $marca_config['font']; ?> !important;
@@ -97,62 +97,6 @@ if ($status_evento == 'Encerrado') {
             --main-font-color-dark: <?php echo $marca_config['font_color_dark']; ?> !important;
             --main-border-color: <?php echo $marca_config['border_color']; ?> !important;
             --main-background-img: url("<?php echo $marca_config['background_img']; ?>");
-        }
-
-        /* Estilo para o botão quando o lead já foi contatado */
-        .btn.contacted {
-            background-color: #6c757d;
-            /* Cor "secondary" do Bootstrap */
-            border-color: #6c757d;
-            color: #fff;
-            /* Cor do texto */
-        }
-
-        /* Ajuste para o ícone dentro do botão */
-        .btn.contacted i.fa-check {
-            margin-right: 5px;
-        }
-
-        /* Opcional: se quiser mudar a opacidade */
-        .btn.contacted {
-            opacity: 1;
-            /* Se preferir manter a opacidade normal */
-        }
-        video {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          z-index: -1; 
-        }
-        .dataTables_wrapper{
-          padding-top:30px;
-        }
-        #myTab{
-            background: #f3f3f3;
-            padding: 5px;
-            border-radius: 10px;
-        }
-        .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
-            border-radius: 5px !important;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            display: block;
-        }
-        .nav-tabs .nav-link{
-            border-radius: 5px !important;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            display: block;
-            color: #000;
-        }
-        li.nav-item{
-            width: 50%;
-            text-align: center;
         }
     </style>
 </head>
@@ -172,9 +116,25 @@ if ($status_evento == 'Encerrado') {
                     </video>
                     </div>
                 </div>
-                <div class="col-lg-4 form-game-container" style="">
+                <div class="col-lg-4 form-game-container">
                     <div class="row gy-0 gx-3">
                         <div class="col-md-12">
+                        <div class="form bg-light px-4 py-3">
+                                <select class="form-select custom-select" id="prospectorSelect">
+                                    <option value="">Selecione um Prospector</option>
+                                    <?php foreach ($prospectores as $prospector):
+                                        $simplecard_link = $prospector['link'] ?? '#';
+                                    ?>
+                                        <option
+                                            value="<?= htmlspecialchars($prospector['prospector_id']) ?>"
+                                            <?= ($prospector_id == $prospector['prospector_id']) ? 'selected' : '' ?>
+                                            data-simplecard-link="<?= htmlspecialchars($simplecard_link) ?>">
+                                            <?= htmlspecialchars($prospector['nome_comercial']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <h6 class="text-main-color px-0"><?php echo $concessionaria_nome; ?></h6>
+                            </div>
                             <div class="logo-event">
                                 <img width="50%" src="assets/img/evento/dexp-icon.png">
                             </div>
@@ -208,27 +168,6 @@ if ($status_evento == 'Encerrado') {
                                         </div>
                                     </button>
                                 </div>
-                            </div>
-
-
-                            <div class="titles mt-4">
-                                <h5 class="">Concessionária</h5>
-                                <h4 class="text-main-color"><?php echo $concessionaria_nome; ?></h4>
-                            </div>
-                            <div class="form">
-                                <select class="form-select custom-select" id="prospectorSelect">
-                                    <option value="">Selecione um Prospector</option>
-                                    <?php foreach ($prospectores as $prospector):
-                                        $simplecard_link = $prospector['link'] ?? '#';
-                                    ?>
-                                        <option
-                                            value="<?= htmlspecialchars($prospector['prospector_id']) ?>"
-                                            <?= ($prospector_id == $prospector['prospector_id']) ? 'selected' : '' ?>
-                                            data-simplecard-link="<?= htmlspecialchars($simplecard_link) ?>">
-                                            <?= htmlspecialchars($prospector['nome_comercial']) ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
                             </div>
                         </div>
 

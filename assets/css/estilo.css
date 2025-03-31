@@ -1,17 +1,82 @@
+/* Estilo para o botão quando o lead já foi contatado */
+.btn.contacted {
+    background-color: #6c757d;
+    /* Cor "secondary" do Bootstrap */
+    border-color: #6c757d;
+    color: #fff;
+    /* Cor do texto */
+}
+
+/* Ajuste para o ícone dentro do botão */
+.btn.contacted i.fa-check {
+    margin-right: 5px;
+}
+
+/* Opcional: se quiser mudar a opacidade */
+.btn.contacted {
+    opacity: 1;
+    /* Se preferir manter a opacidade normal */
+}
+video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; 
+}
+.dataTables_wrapper{
+  padding-top:30px;
+}
+#myTab{
+    background: #f3f3f3;
+    padding: 5px;
+    border-radius: 10px;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+    border-radius: 5px !important;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    display: block;
+}
+.nav-tabs .nav-link{
+    border-radius: 5px !important;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    display: block;
+    color: #000;
+}
+li.nav-item{
+    width: 50%;
+    text-align: center;
+}
+
 html{
     background-color: var(--main-background) !important;
 }
+
 *{
-    /* font-family: var(--main-font) !important; */
     font-family: var(--main-font);
 }
 a{
     text-decoration: none;
 }
+
+.bx-shdw{
+   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.txt-pdr{
+  color: #828282c2 !important;  
+}
+
 .text-bg-info{
     color: var(--main-font-color-light) !important;
 }
-.text-black{b
+.text-black{
     color: var(--main-font-color-dark) !important;
 }
 .containerPontuacao{
