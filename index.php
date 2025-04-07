@@ -65,6 +65,22 @@ if ($status_evento == 'Encerrado') {
     header("Location: https://simpledealers.com.br/#EventoEncerrado");
     exit();
 }
+
+// ---------- AO REINICIAR TIRAR A ATIVIDADE E DADO DO VENDEDOR ----------
+$currentUrl = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+
+$parsedUrl = parse_url($currentUrl);
+$queryString = $parsedUrl['query'] ?? '';
+
+if (strpos($queryString, '&') !== false) {
+    $cleanQuery = strtok($queryString, '&');
+    $cleanUrl = "{$parsedUrl['scheme']}://{$parsedUrl['host']}{$parsedUrl['path']}?{$cleanQuery}";
+
+    if ($currentUrl !== $cleanUrl) {
+        header("Location: $cleanUrl");
+        exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -82,14 +98,18 @@ if ($status_evento == 'Encerrado') {
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
+    <link href="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/minified/introjs.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="./assets/css/introJS.css">
+
     <meta property="og:title" content="<?php echo $marca; ?> | <?php echo $concessionaria_nome . " " . $loja;  ?>" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://<?php echo $dominioEvento ?>/assets/img/og.png?<?php echo date('h:m:s'); ?>" />
     <meta property="og:url" content="<?php echo $dominioEvento ?>" />
 
     <style>
-          :root {
+        :root {
             --main-color: <?php echo $marca_config['color']; ?> !important;
             --main-background: <?php echo $marca_config['background']; ?> !important;
             --main-font: <?php echo $marca_config['font']; ?> !important;
@@ -110,61 +130,59 @@ if ($status_evento == 'Encerrado') {
                 </div>
                 <div class="col-lg-8 cover-event">
                     <div class="cover-bg">
-                    <video autoplay loop muted>
-                      <source src="<?php echo $marca_config['background_video']; ?>" type="video/webm">
-                      Seu navegador não suporta o formato de vídeo.
-                    </video>
+                        <video autoplay loop muted>
+                            <source src="<?php echo $marca_config['background_video']; ?>" type="video/webm">
+                            Seu navegador não suporta o formato de vídeo.
+                        </video>
                     </div>
                 </div>
-                <div class="col-lg-4 form-game-container">
+                <div class="col-lg-4 form-game-container py-4 px-4">
                     <div class="row gy-0 gx-3">
-                        <div class="col-md-12">
-                        <div class="form bg-light px-4 py-3">
-                                <select class="form-select custom-select" id="prospectorSelect">
-                                    <option value="">Selecione um Prospector</option>
-                                    <?php foreach ($prospectores as $prospector):
-                                        $simplecard_link = $prospector['link'] ?? '#';
-                                    ?>
-                                        <option
+                        <div class="col-md-12 btn-two">
+                            <div class="form prospector-selector-container d-flex bx-shdw px-4 py-3 btn-one">
+                            <div class="col-2 box-img-seller d-flex justify-content-center">
+                                    <img class="img-seller rounded-circle" src="assets/dealers/user.png">
+                                </div>
+                                <div class="col-10 px-2">
+                                    <select class="form-select custom-select" id="prospectorSelect">
+                                        <option value="">Selecione um Prospector</option>
+                                        <?php foreach ($prospectores as $prospector): $simplecard_link = $prospector['link'] ?? '#';?>
+                                            <option
                                             value="<?= htmlspecialchars($prospector['prospector_id']) ?>"
                                             <?= ($prospector_id == $prospector['prospector_id']) ? 'selected' : '' ?>
                                             data-simplecard-link="<?= htmlspecialchars($simplecard_link) ?>">
                                             <?= htmlspecialchars($prospector['nome_comercial']) ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <h6 class="text-main-color px-0"><?php echo $concessionaria_nome; ?></h6>
-                            </div>
-                            <div class="logo-event">
-                                <img width="50%" src="assets/img/evento/dexp-icon.png">
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <h6 class="concession-name "><?php echo $concessionaria_nome; ?></h6>
+                                </div>
                             </div>
 
-                            <div id="painelPontuacao" class="mb-4" style="display: <?= $prospector_id ? 'flex' : 'none' ?>;">
-                                <img class="col-12 logo-marca" src="<?php echo htmlspecialchars($marca_config['logo']); ?>?cache">
-                                <!--<h2 class="text-white padding-15"><?php echo $concessionaria_nome ?><br></h2>-->
-                                <div class="col-4 containerPontuacao">
-                                    <div class="gameTitle"><i class="fa fa-gamepad color"></i>Pontuação</div>
-                                    <span class="color" id="totalPontuacao">0</span>
+                            <div id="painelPontuacao" class="mb-3" style="display: <?= $prospector_id ? 'flex' : 'none' ?>;">
+                                <div class="col-4 containerPontuacao d-flex flex-column align-items-center justify-content-between">
+                                    <span class=" score text-orange" id="totalPontuacao">0</span>
+                                    <div class="gameTitle txt-pdr">Pontuação</div>
+
                                 </div>
-                                <div class="text-white col-4 containerPontuacao text-orange">Agendamentos <span style="font-size: 53px;" id="totalAtividades">0</span></div>
+                                <div class="col-4 containerPontuacao border-dashed d-flex flex-column align-items-center justify-content-between txt-pdr"><span class="score text-orange" id="totalAtividades">0</span> Agendamentos </div>
+                                <div class="col-4 containerPontuacao border-dashed d-flex flex-column align-items-center justify-content-between txt-pdr" id="btnRankingGeral"><span class="score text-orange mb-2" id="rankingPosicao">0º</span>Ranking</div>
                             </div>
 
                             <div class="row dealer-area" id="dealerArea" style="display: <?= $prospector_id ? 'flex' : 'none' ?>;">
                                 <div class="col-6 col-md-6">
-                                    <button class="btn btn-primary card text-bg-info btn-acesso-leads" id="btnAcessarLeads">
+                                    <button class="btn btn-primary card text-bg-info btn-acesso-leads bx-shdw btn-three" id="btnAcessarLeads">
                                         <span id="novoLeadsCount">0 novos</span>
                                         <div class="card-body card-dealer-area" style="text-align: left; padding-left: 5px;">
-                                            <i class="fa fa-users flex-items"></i>
-                                            <h2 class="card-title flex-items">Acessar<br> meus leads</h2>
+                                            <h2 class="card-title flex-items text-orange">Acessar<br> meus leads</h2>
                                         </div>
                                     </button>
                                 </div>
                                 <div class="col-6 col-md-6">
-                                    <button class="btn btn-primary card text-bg-info btn-ranking" id="btnRankingGeral">
-                                        <span id="rankingPosicao">--º</span>
+                                    <button class="btn btn-primary card text-bg-info btn-ranking bx-shdw btn-six" id="btnRankingGeral">
+                                        <span id=""><i class="fa-regular fa-copy"></i></span>
                                         <div class="card-body card-dealer-area" style="text-align: left; padding-left: 5px;">
-                                            <i class="fa fa-list-ol flex-items"></i>
-                                            <h2 class="card-title flex-items">Ranking<br> Geral</h2>
+                                            <h2 class="card-title flex-items text-orange">Mensagem<br> Estruturada</h2>
                                         </div>
                                     </button>
                                 </div>
@@ -178,7 +196,7 @@ if ($status_evento == 'Encerrado') {
                                 <div class="row gy-3 gx-3">
 
                                     <div class="col-12 col-md-6">
-                                        <button class="btn btn-primary atividade-btn card text-bg-info pulsedealers btn-agendar" style="width: 100%;" data-atividade="Registrar Agendamento" data-atividade-id="1">
+                                        <button type="button" id="btnAgendar" class="btn btn-primary atividade-btn card text-bg-info btn-agendar btn-four" style="width: 100%;" data-bs-toggle="modal" data-bs-target="#registrarModal">
                                             <div class="card-body flex-container" style="text-align: left; padding-left: 5px;">
                                                 <i class="fa fa-user-plus flex-items" style="color:#fff !important;"></i>
                                                 <h2 class="card-title flex-items">Registrar<br> Agendamento</h2>
@@ -191,7 +209,7 @@ if ($status_evento == 'Encerrado') {
                                     </div>
 
                                     <div class="col-12 col-md-6 simplecard-button">
-                                        <a href="#" id="simplecardLink" class="btn btn-primary card text-bg-info" style="color: #ff5600 !important;background: #fff !important;border: solid 3px #ff5600;">
+                                        <a href="#" id="simplecardLink" class="btn btn-primary card text-bg-info bx-shdw btn-five" style="color: #ff5600 !important;background: #fff !important;border: none !important;">
                                             <div class="card-body flex-container" style="text-align: left; padding-left: 5px;">
                                                 <h4 class="uptitle flex-items"><i class="fa fa-address-card f20 text-orange"></i> simple card</h4>
                                                 <h2 class="card-title flex-items" style=" font-size: 13px;color: #ff5600;"><span> Acessar perfil</span><br>do vendedor</h2>
@@ -200,38 +218,54 @@ if ($status_evento == 'Encerrado') {
                                     </div>
 
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <a href="http://simpledealers.com.br" class="footer-logo">
-                                            <img width="250" src="assets/img/power-by-simple-dealers.svg" style="margin: 0 auto;filter: brightness(0.2);" alt="Powered by Simple Dealers">
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </main>
 
-    <div class="modal fade" id="atividadeModal" tabindex="-1" role="dialog" aria-labelledby="atividadeModalLabel" aria-hidden="true">
+    <!-- Modal de Registrar Agendamento -->
+    <div class="modal fade" id="registrarModal" tabindex="-1" role="dialog" aria-labelledby="registrarModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form id="atividadeForm" enctype="multipart/form-data">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Registrar Atividade</h5>
+                        <h5 class="modal-title">Registrar Agendamento</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                     </div>
                     <div class="modal-body">
                         <div id="modalAlertContainer"></div>
                         <div id="camposAtividade">
+                            <div class="modalSubtitle">Registre as informações do seu agendamento nos campos abaixo.</div>
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome:</label>
+                                <input type="text" class="form-control" name="nome" required="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="sobrenome" class="form-label">Sobrenome:</label>
+                                <input type="text" class="form-control" name="sobrenome" required="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefone" class="form-label">Telefone:</label>
+                                <input type="text" class="form-control" name="telefone" required="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="observacao" class="form-label">Observação:</label>
+                                <textarea class="form-control" name="observacao" placeholder="Se houver alguma observação sobre o lead, utilize esse campo." rows="3"></textarea>
+                            </div>
+                            <input type="hidden" name="dealer_id" value="1">
+                            <input type="hidden" name="did" value="1">
+                            <input type="hidden" name="marca" value="SimpleDealers">
+                            <input type="hidden" name="concessionaria" value="Simple Dealers">
+                            <input type="hidden" name="loja" value="Loja">
+                            <input type="hidden" name="cnpj" value="123.65456.45/000">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" name="prospector_id" id="prospector_id" value="<?= htmlspecialchars($prospector_id) ?>">
-                        <input type="hidden" name="atividade_id" id="atividade_id" value="">
+                        <input type="hidden" name="prospector_id" id="prospector_id" value="1">
+                        <input type="hidden" name="atividade_id" id="atividade_id" value="1">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary button-action">Registrar</button>
                     </div>
@@ -267,7 +301,7 @@ if ($status_evento == 'Encerrado') {
     </div>
 
     <!-- Modal para exibir os leads -->
-    <div class="modal fade" id="leadsModal" tabindex="-1" role="dialog" aria-labelledby="leadsModalLabel" aria-hidden="true">
+    <div class="modal fade show" id="leadsModal" tabindex="-1" role="dialog" aria-labelledby="leadsModalLabel" aria-modal="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -275,24 +309,71 @@ if ($status_evento == 'Encerrado') {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
-                    
-                     <!-- Nav Tabs -->
+                    <!-- Nav Tabs -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="pendentes-tab" data-bs-toggle="tab" href="#pendentes" role="tab" aria-controls="pendentes" aria-selected="true">Pendentes de confirmação</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="confirmados-tab" data-bs-toggle="tab" href="#confirmados" role="tab" aria-controls="confirmados" aria-selected="false">Confirmados para o evento</a>
+                            <a class="nav-link" id="confirmados-tab" data-bs-toggle="tab" href="#confirmados" role="tab" aria-controls="confirmados" aria-selected="false" tabindex="-1">Status confirmação</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="pendentes" role="tabpanel" aria-labelledby="pendentes-tab">
-                            <table id="leadsTable" class="display" style="width:100%;">
-                                <!-- O DataTables irá preencher o conteúdo -->
-                            </table>
-                        </div>
-                        <div class="tab-pane fade" id="confirmados" role="tabpanel" aria-labelledby="confirmados-tab">
-                            <p>Conteúdo de confirmados</p>
+                        <div class="tab-pane fade active show" id="pendentes" role="tabpanel" aria-labelledby="pendentes-tab">
+                            <div id="leadsTable_wrapper" class="dataTables_wrapper no-footer">
+                                <div class="dataTables_length" id="leadsTable_length"><label>Exibir <select name="leadsTable_length" aria-controls="leadsTable" class="">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select> resultados por página</label></div>
+                                <div id="leadsTable_filter" class="dataTables_filter">
+                                    <label>Pesquisar<input type="search" class="" placeholder="Buscar registros" aria-controls="leadsTable">
+                                    </label>
+                                </div>
+                                <table id="leadsTable" class="display dataTable no-footer" style="width: 100%;" aria-describedby="leadsTable_info">
+                                    <!-- O DataTables irá preencher o conteúdo -->
+                                    <thead>
+                                        <tr>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 504px;">Nome</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 234px;">Telefone</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 199px;">Origem</th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 93px;">Presença</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="even">
+                                            <td>Cliente Nome</td>
+                                            <td>
+                                                <a href="#" target="_blank" class="btn btn-primary btn-sm whatsapp-button" data-lead-id="267989">
+                                                    <i class="fa-brands fa-whatsapp"></i>
+                                                </a> 
+                                                <a href="tel:5519991234567" class="btn btn-primary btn-sm telephone-button" data-lead-id="267989">
+                                                    <i class="fa fa-phone"></i> +55 (19) 99123-4567
+                                                </a>
+                                            </td>
+                                            <td>Fluxo de Loja</td>
+                                            <td>
+                                                <a href="#" class="btn btn-success btn-sm thumbs_up" data-lead-id="267989">
+                                                    <i class="fa fa-thumbs-up"></i>
+                                                </a> 
+
+                                                <a href="#" class="btn btn-danger btn-sm thumbs_down" data-lead-id="267989">
+                                                    <i class="fa fa-thumbs-down"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="dataTables_info" id="leadsTable_info" role="status" aria-live="polite">Mostrando de 1 até 10 de 1 registros</div>
+                                <div class="dataTables_paginate paging_simple_numbers" id="leadsTable_paginate">
+                                    <a class="paginate_button previous disabled" aria-controls="leadsTable" aria-disabled="true" aria-role="link" data-dt-idx="previous" tabindex="-1" id="leadsTable_previous" href="#">Anterior</a>
+                                    <span>
+                                        <a class="paginate_button current" aria-controls="leadsTable" aria-role="link" aria-current="page" data-dt-idx="0" tabindex="0" href="#">1</a>
+                                    </span>
+                                    <a class="paginate_button next disabled" aria-controls="leadsTable" aria-role="link" data-dt-idx="next" tabindex="0" id="leadsTable_next" href="#">Próximo</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -300,15 +381,13 @@ if ($status_evento == 'Encerrado') {
         </div>
     </div>
 
-
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/intro.min.js"></script>
+    <script src="/assets/js/introJs.js"></script>
     
-    
-    
-
     <script>
         let dealerId = '<?= htmlspecialchars($dealer_id) ?>';
         $(document).ready(function() {
@@ -318,67 +397,6 @@ if ($status_evento == 'Encerrado') {
             function atualizarURL(consultor) {
                 const newURL = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${encodeURIComponent(directLink)}&consultor=${encodeURIComponent(consultor)}`;
                 window.history.replaceState({}, '', newURL);
-            }
-
-            function carregarStatusAtividades(prospectorId) {
-                $.ajax({
-                    url: 'registrar_atividades.php',
-                    method: 'POST',
-                    data: {
-                        action: 'status_atividades',
-                        prospector_id: prospectorId
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success) {
-                            const atividadesFeitas = response.atividades;
-                            $('.atividade-btn').each(function() {
-                                const atividadeId = $(this).data('atividade-id');
-                                const atividadeNome = $(this).data('atividade');
-
-                                if ([3, 4, 5, 6, 7, 8].includes(parseInt(atividadeId))) {
-                                    if (atividadesFeitas.includes(atividadeNome)) {
-                                        $(this).prop('disabled', true).removeClass('btn-primary').addClass('btn-success');
-                                        $(this).attr('title', 'Atividade já realizada.');
-                                        $(this).find('.ponto').text('ponto registrado');
-                                    } else {
-                                        $(this).prop('disabled', false).removeClass('btn-success').addClass('btn-primary');
-                                        $(this).removeAttr('title');
-                                        $(this).find('.ponto').text('ponto registrado');
-                                    }
-                                }
-                            });
-                        } else {
-                            showAlert('Erro ao carregar status das atividades: ' + response.message, 'danger');
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        showAlert('Erro na requisição AJAX: ' + textStatus + ' - ' + errorThrown, 'danger');
-                    }
-                });
-            }
-
-            function carregarPontuacao(prospectorId) {
-                $.ajax({
-                    url: 'registrar_atividades.php',
-                    method: 'POST',
-                    data: {
-                        action: 'pontuacao_total',
-                        prospector_id: prospectorId
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success) {
-                            $('#totalPontuacao').text(response.total);
-                            $('#totalAtividades').text(response.total_agendamentos);
-                        } else {
-                            showAlert('Erro ao carregar pontuação total: ' + response.message, 'danger');
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        showAlert('Erro na requisição AJAX: ' + textStatus + ' - ' + errorThrown, 'danger');
-                    }
-                });
             }
 
             function showAlert(message, type = 'success', container = '#alertContainer') {
@@ -391,161 +409,6 @@ if ($status_evento == 'Encerrado') {
                 $(container).html(alertHtml);
             }
 
-            $('#atividadeModal').on('show.bs.modal', function() {
-                $('#modalAlertContainer').html('');
-            });
-
-            function atualizarSimplecardLink(prospectorSelect) {
-                const selectedOption = prospectorSelect.find('option:selected');
-                const simplecardLink = selectedOption.data('simplecard-link') || '#';
-                $('#simplecardLink').attr('href', simplecardLink);
-            }
-
-            if (prospectorId > 0) {
-                carregarStatusAtividades(prospectorId);
-                carregarPontuacao(prospectorId);
-                const prospectorSelect = $('#prospectorSelect');
-                atualizarSimplecardLink(prospectorSelect);
-                $('#painelPontuacao').show();
-                $('#dealerArea').show();
-                carregarRanking(prospectorId);
-                carregarNovosLeads(prospectorId);
-            }
-
-            $('#prospectorSelect').change(function() {
-                const selectedId = $(this).val();
-                if (selectedId) {
-                    const selectedOption = $(this).find('option:selected').text();
-                    const consultor = selectedOption.replace(/\s+/g, '');
-                    atualizarURL(consultor);
-
-                    prospectorId = selectedId;
-                    $('#prospector_id').val(prospectorId);
-                    $('#atividades').show();
-                    $('#painelPontuacao').show();
-                    $('#dealerArea').show();
-                    carregarStatusAtividades(prospectorId);
-                    carregarPontuacao(prospectorId);
-                    carregarRanking(prospectorId);
-                    carregarNovosLeads(prospectorId);
-
-                    atualizarSimplecardLink($(this));
-                } else {
-                    $('#atividades').hide();
-                    $('#painelPontuacao').hide();
-                    $('#dealerArea').hide();
-                    $('#totalPontuacao').text('0');
-                    $('#totalAtividades').text('0');
-                    $('.atividade-btn').prop('disabled', false).removeClass('btn-success').addClass('btn-primary').removeAttr('title');
-                    $('#simplecardLink').attr('href', '#');
-                }
-            });
-
-            $('.atividade-btn').click(function() {
-                const atividadeNome = $(this).data('atividade');
-                const atividadeId = $(this).data('atividade-id');
-                $('#atividade_id').val(atividadeId);
-                $('#atividadeModal .modal-title').text('' + atividadeNome);
-                let campos = '';
-
-                // Definir campos com base na atividade selecionada
-                switch (atividadeNome) {
-                    case 'Registrar Agendamento':
-                        campos = `
-                    <div class="modalSubtitle">Registre as informações do seu agendamento nos campos abaixo.</div>
-                    <div class="mb-3">
-                        <label for="nome" class="form-label">Nome:</label>
-                        <input type="text" class="form-control" name="nome" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="sobrenome" class="form-label">Sobrenome:</label>
-                        <input type="text" class="form-control" name="sobrenome" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="telefone" class="form-label">Telefone:</label>
-                        <input type="text" class="form-control" name="telefone" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="observacao" class="form-label">Observação:</label>
-                        <textarea class="form-control" name="observacao" placeholder="Se houver alguma observação sobre o lead, utilize esse campo." rows="3"></textarea>
-                    </div>
-                    <input type="hidden" name="dealer_id" value="<?= htmlspecialchars($dealer_id) ?>">
-                    <input type="hidden" name="did" value="<?= htmlspecialchars($did) ?>">
-                    <input type="hidden" name="marca" value="<?= htmlspecialchars($marca) ?>">
-                    <input type="hidden" name="concessionaria" value="<?= htmlspecialchars($concessionaria_nome) ?>">
-                    <input type="hidden" name="loja" value="<?= htmlspecialchars($loja) ?>">
-                    <input type="hidden" name="cnpj" value="<?= htmlspecialchars($cnpj) ?>">
-                `;
-                        break;
-                    case 'Registrar Venda':
-                        campos = `
-                    <div class="modalSubtitle">Registre suas vendas e brilhe!<br> Preencha as informações abaixo.</div>
-                    <div class="mb-3">
-                        <label for="nome" class="form-label">Nome:</label>
-                        <input type="text" class="form-control" name="nome" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="sobrenome" class="form-label">Sobrenome:</label>
-                        <input type="text" class="form-control" name="sobrenome" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="imagem" class="form-label">Evidência em Imagem:</label>
-                        <input type="file" class="form-control-file" name="imagem" accept="image/*" required>
-                    </div>
-                `;
-                        break;
-                    default:
-                        campos = `
-                    <div class="modalSubtitle">Envie a evidência solicitada para registrar esta atividade.</div>
-                    <div class="mb-3">
-                        <label for="imagem" class="form-label">Upload de Imagem:</label>
-                        <input type="file" class="form-control-file" name="imagem" accept="image/*" required>
-                    </div>
-                `;
-                }
-
-                $('#camposAtividade').html(campos);
-                $('#atividadeModal').modal('show');
-            });
-
-            $('#atividadeForm').submit(function(e) {
-                e.preventDefault();
-                const atividadeId = $('#atividade_id').val();
-                let formData = new FormData(this);
-
-                formData.append('action', 'atividade');
-                formData.append('atividade_id', atividadeId);
-
-                const submitButton = $(this).find('button[type="submit"]');
-                submitButton.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Registrando...');
-
-                $.ajax({
-                    url: 'registrar_atividades.php',
-                    method: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success) {
-                            showAlert(response.message, 'success', '#alertContainer');
-                            $('#atividadeModal').modal('hide');
-                            carregarStatusAtividades(prospectorId);
-                            carregarPontuacao(prospectorId);
-                            $('#atividadeForm')[0].reset();
-                            $('#camposAtividade').html('');
-                            $('#modalAlertContainer').html('');
-                        } else {
-                            showAlert('Erro: ' + response.message, 'danger', '#modalAlertContainer');
-                        }
-                        submitButton.prop('disabled', false).html('Registrar');
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        showAlert('Erro na requisição AJAX: ' + textStatus + ' - ' + errorThrown, 'danger', '#modalAlertContainer');
-                        submitButton.prop('disabled', false).html('Registrar');
-                    }
-                });
-            });
 
             // Atualizar a exibição dos botões adicionais quando um prospector é selecionado
             $('#prospectorSelect').change(function() {
@@ -560,7 +423,6 @@ if ($status_evento == 'Encerrado') {
                     $('#atividades').show();
                     $('#painelPontuacao').show();
                     $('#dealerArea').show();
-                    carregarStatusAtividades(prospectorId);
                     carregarPontuacao(prospectorId);
                     carregarRanking(prospectorId);
                     carregarNovosLeads(prospectorId);
@@ -578,255 +440,38 @@ if ($status_evento == 'Encerrado') {
             });
 
             // Clique no botão "Acessar meus leads"
-$('#btnAcessarLeads').click(function() {
-    $('#senhaModal').modal('show');
-});
-
-// Submissão do formulário de senha
-$('#senhaForm').submit(function(e) {
-    e.preventDefault();
-    const senha = $('#senhaInput').val();
-
-    $.ajax({
-        url: 'validar_senha.php',
-        method: 'POST',
-        data: {
-            prospector_id: prospectorId,
-            senha: senha
-        },
-        dataType: 'json',
-        success: function(response) {
-            if (response.success) {
-                $('#senhaModal').modal('hide');
-                $('#senhaForm')[0].reset();
-                carregarLeads(prospectorId);
-                $('#leadsModal').modal('show');
-            } else {
-                showAlert(response.message, 'danger', '#senhaAlertContainer');
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            showAlert('Erro na requisição AJAX: ' + textStatus + ' - ' + errorThrown, 'danger', '#senhaAlertContainer');
-        }
-    });
-});
-
-// Função para carregar os leads do prospector
-function carregarLeads(prospectorId) {
-    const nomeEvento = '<?= htmlspecialchars($nomeEvento) ?>'; // Nome do evento
-    const dominioEvento = '<?= htmlspecialchars($dominioEvento) ?>'; // Domínio do evento
-
-    $.ajax({
-        url: 'obter_leads.php',
-        method: 'POST',
-        data: {
-            prospector_id: prospectorId
-        },
-        dataType: 'json',
-        success: function(response) {
-            if (response.success) {
-                const leads = response.leads;
-                let dataSet = [];
-                leads.forEach(function(lead) {
-                    // Criar a mensagem personalizada
-                    const message = `Olá *${lead.nome_completo}*,\n\nVocê foi convidado para participar do Evento *${nomeEvento}*.\n\nEsse é o link do seu convite ➽ https://${dominioEvento}/convite/?lead_id=${lead.lead_id}`;
-
-                    // Codificar a mensagem
-                    const encodedMessage = encodeURIComponent(message);
-
-                    // Gerar o link do WhatsApp
-                    const whatsappLink = `https://wa.me/${lead.telefone.replace(/\D/g, '')}?text=${encodedMessage}`;
-
-                    // Determinar o texto e o ícone do botão com base no status de contato
-                    let buttonLabel;
-                    if (lead.contacted) {
-                        buttonLabel = '<i class="fa fa-check"></i> Enviado';
-                    } else {
-                        buttonLabel = 'Reenviar Convite';
-                    }
-
-                    const buttonClass = lead.contacted ? 'btn btn-success btn-sm contacted' : 'btn btn-primary btn-sm';
-
-                    
-                    // Criar o botão do WhatsApp
-                    const telefone = `${lead.telefone}`;
-                    
-                    // Criar o botão do WhatsApp
-                    const whatsappButton = `<a href="${whatsappLink}" target="_blank" class="${buttonClass} whatsapp-button" data-lead-id="${lead.lead_id}">${buttonLabel}</a>`;
-
-                    // Criar os links adicionais para a coluna "Ações"
-                    const vai = `<a href="#" class="btn btn-success btn-lg"><i class="fa fa-thumbs-up"></i></a>`;
-                    const naoVai = `<a href="#" class="btn btn-danger btn-lg" data-lead-id="${lead.lead_id}"><i class="fa fa-thumbs-down"></i></a>`;
-
-                    // Adicionar os links na coluna "Ações"
-                    const actionsColumn = `${vai} ${naoVai}`;
-
-                    dataSet.push([
-                        lead.nome_completo,
-                        telefone,
-                        //whatsappButton,
-                        lead.typelead,
-                        actionsColumn
-                    ]);
-                });
-
-                // Inicializar o DataTable
-                const dataTable = $('#leadsTable').DataTable({
-                    data: dataSet,
-                    columns: [
-                        { title: "Nome" },
-                        { title: "Telefone" },
-                        { title: "Origem" },
-                        { title: "Confirmação" }
-                    ],
-                    destroy: true,
-                    ordering: false,
-                    language: {
-                        url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/pt-BR.json"
-                    }
-                });
-
-                // Adicionar o manipulador de eventos para os botões do WhatsApp
-                $('#leadsTable').off('click', 'a.whatsapp-button');
-                $('#leadsTable').on('click', 'a.whatsapp-button', function(event) {
-                    event.preventDefault();
-
-                    const buttonElement = $(this);
-                    const lead_id = buttonElement.data('lead-id');
-                    const whatsappLink = buttonElement.attr('href');
-
-                    leadContacted(lead_id, whatsappLink, buttonElement);
-                });
-
-                // Adicionar o manipulador de eventos para os botões de exclusão
-                $('#leadsTable').on('click', '.delete-lead', function(event) {
-                    event.preventDefault();
-                    const leadId = $(this).data('lead-id');
-                    if (confirm('Tem certeza de que deseja excluir este lead?')) {
-                        $.ajax({
-                            url: 'delete_lead.php',
-                            method: 'POST',
-                            data: { lead_id: leadId },
-                            success: function(response) {
-                                if (response.success) {
-                                    alert('Lead excluído com sucesso.');
-                                    // Recarregar a tabela ou remover a linha correspondente
-                                    carregarLeads(prospectorId);
-                                } else {
-                                    alert('Erro ao excluir o lead: ' + response.message);
-                                }
-                            },
-                            error: function() {
-                                alert('Erro ao comunicar com o servidor.');
-                            }
-                        });
-                    }
-                });
-
-                $('#leadsModal').modal('show');
-
-                // Atualizar a contagem de novos leads
-                carregarNovosLeads(prospectorId);
-            } else {
-                showAlert(response.message, 'danger', '#leadsModal .modal-body');
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            let errorMsg = 'Erro na requisição AJAX: ' + textStatus + ' - ' + errorThrown;
-            if (jqXHR.responseText) {
-                errorMsg += '<br>Resposta do servidor: ' + jqXHR.responseText;
-            }
-            showAlert(errorMsg, 'danger', '#leadsModal .modal-body');
-        }
-    });
-}
-
-function leadContacted(lead_id, whatsappLink, buttonElement) {
-    $.ajax({
-        url: 'lead_contacted.php',
-        method: 'POST',
-        data: {
-            lead_id: lead_id
-        },
-        success: function(response) {
-            if (response.success) {
-                buttonElement.addClass('contacted btn-secondary');
-                buttonElement.removeClass('btn-success');
-                buttonElement.html('<i class="fa fa-check"></i> Enviado');
-                window.open(whatsappLink, '_blank');
-            } else {
-                alert('Erro ao registrar o contato: ' + response.message);
-                window.open(whatsappLink, '_blank');
-            }
-        },
-        error: function() {
-            alert('Erro ao comunicar com o servidor.');
-            window.open(whatsappLink, '_blank');
-        }
-    });
-}
-
-
-            // Função para carregar o ranking do prospector
-            function carregarRanking(prospectorId) {
-                $.ajax({
-                    url: 'obter_ranking.php',
-                    method: 'POST',
-                    data: {
-                        prospector_id: prospectorId
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success) {
-                            $('#rankingPosicao').text(response.rankingGeral + 'º Geral (' + response.rankingConcessionaria + 'º)');
-                        } else {
-                            $('#rankingPosicao').text('0º');
-                        }
-                    },
-                    error: function() {
-                        $('#rankingPosicao').text('0º');
-                    }
-                });
-            }
-
-            // Função para carregar o número de novos leads
-            function carregarNovosLeads(prospectorId) {
-                $.ajax({
-                    url: 'obter_novos_leads.php',
-                    method: 'POST',
-                    data: {
-                        prospector_id: prospectorId
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success) {
-                            $('#novoLeadsCount').text(response.novosLeads + ' novos');
-                        } else {
-                            $('#novoLeadsCount').text('0 novos');
-                        }
-                    },
-                    error: function() {
-                        $('#novoLeadsCount').text('0 novos');
-                    }
-                });
-            }
-
-
-            // // Clique no botão "Ranking Geral"
-            // $('#btnRankingGeral').click(function() {
-            //     window.open('ranking_geral.php?prospector_id=' + prospectorId, '_blank');
-            // });
-            // Clique no botão "Ranking Geral"
-            $('#btnRankingGeral').click(function() {
-                if (dealerId && prospectorId) {
-                    window.open('ranking/?dealer_id=' + dealerId + '&prospector_id=' + prospectorId, '_blank');
-                } else if (dealerId) {
-                    window.open('ranking/?dealer_id=' + dealerId, '_blank');
-                } else {
-                    window.open('ranking/', '_blank');
-                }
+            $('#btnAcessarLeads').click(function() {
+                $('#senhaModal').modal('show');
             });
 
+            $('#senhaForm').submit(function(e) {
+                e.preventDefault();
+                const senha = $('#senhaInput').val();
+
+                $.ajax({
+                    url: 'validar_senha.php',
+                    method: 'POST',
+                    data: {
+                        prospector_id: prospectorId,
+                        senha: senha
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            $('#senhaModal').modal('hide');
+                            $('#senhaForm')[0].reset();
+
+                            $('#leadsModal').modal('show');
+
+                        } else {
+                            showAlert(response.message, 'danger', '#senhaAlertContainer');
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        showAlert('Erro na requisição AJAX: ' + textStatus + ' - ' + errorThrown, 'danger', '#senhaAlertContainer');
+                    }
+                });
+            });
         });
     </script>
     <!-- DataTables JS -->

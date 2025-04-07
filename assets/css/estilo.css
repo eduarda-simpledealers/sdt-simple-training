@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 /* Estilo para o botão quando o lead já foi contatado */
 .btn.contacted {
     background-color: #6c757d;
@@ -59,18 +61,77 @@ html{
 }
 
 *{
-    font-family: var(--main-font);
+    font-family: "Bai Jamjuree", sans-serif;
+    font-weight: 400;
 }
 a{
     text-decoration: none;
 }
+
+/* Adicionais */
+.prospector-selector-container{
+    background: #fff;
+    border-radius: 5rem;
+}
+
+.concession-name{
+    color: #828282c2;
+    padding: 0 12px;
+}
+
+#rankingPosicao{
+    font-size: 22px;
+}
+
+.score{
+    font-size: 27px;
+    font-weight: 600;
+}
+
+#btnAgendar::after{
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    top: 50%;
+    left: 0%;
+    background: #ececec;
+}
+#btnAgendar::before{
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    top: 50%;
+    left: 100%;
+    background: #ececec;
+}
+
+#btnRankingGeral{
+    cursor: pointer;
+}
+
+.dark-font{
+    color: #262626 !important;
+}
+
+.img-seller{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+/* Fim adaicionais  */
 
 .bx-shdw{
    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .txt-pdr{
-  color: #828282c2 !important;  
+  color: #505050ea !important;  
 }
 
 .text-bg-info{
@@ -80,14 +141,12 @@ a{
     color: var(--main-font-color-dark) !important;
 }
 .containerPontuacao{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: space-between;
     font-size: 0.625rem;
     text-transform: uppercase;
-    padding-left: 0.5rem;
-    border-left: 2px dashed var(--main-border-color) !important;
+}
+
+.border-dashed{
+    border-left: 1px solid var(--main-border-color) !important;
 }
 
 .gameTitle{
@@ -103,28 +162,23 @@ a{
 
 #painelPontuacao{
     display: flex;
-    gap: 10px;
     width: 100%;
-    padding-bottom: 1em;
-    border-bottom: 2px dashed var(--main-border-color) !important;
-    max-height: 130px;
+    max-height: 42px;
 }
 
 #totalPontuacao{
         position: relative;
         text-align: center;
-        font-size: 77px;
 }
 
 #totalAgendamentos{
-    bottom: -8px;
-    font-size: 53px;
     position: relative;
+    text-align: center;
 }
 
 .text-bg-info{
     background-color: var(--main-color) !important;
-    border-radius: 15px;
+    border-radius: 16px;
 }
 .cover-event{
     padding: 0;
@@ -134,50 +188,35 @@ a{
     width: 100%;
     background: var(--main-background-img) !important;
     background-size: cover !important;
-    filter: brightness(0.3);
+    filter: brightness(0.25);
     height: 100vh;
+    position: fixed;
 }
 
 .form-select{
-    background-color: #f3f3f3;
+    background: none;
     border-color: transparent;
-    color: #545454;
-    font-size: 0.875rem;
-    padding: 12px;
+    color: #262626;
+    font-weight: 800;
+    font-size: .96rem;
+    padding: 8px 12px 5px 12px;
 }
 
 .form-select:focus {
-    border-color: var(--main-background) !important;
+    border: none !important;
     outline: 0;
-    box-shadow: 0 0 0 .25rem rgb(42 42 42 / 25%);
+    box-shadow: none !important;
 }
 
 .form-game-container{
-    padding: 1% 3% 2%;
     background-image: url(../img/carros/f1.png) !important;
     background-size: 100% !important;
     background-repeat: no-repeat !important;
     background-position-y: bottom !important;
-}
-/*.form-game-container:after{*/
-/*    content: '';*/
-/*    height: 872px;*/
-/*    width: 200px;*/
-/*    display: block;*/
-/*    background: #ffffff;*/
-/*    position: absolute;*/
-/*    right: 764px;*/
-/*    rotate: 1.5222deg;*/
-/*    top: -4px;*/
-/*    clip-path: polygon(20% -10%, 60% 0%, 70% 92%, -50% -80%);*/
-/*    z-index: 0;*/
-/*}*/
-/*.form-game-container:before{*/
-/*    content:'';*/
-/*}*/
-.logo-event{
-    display: none;
-    margin: 0px 0 35px;
+    overflow:hidden;
+    border-radius: 1rem 0 0 1rem;
+    background: #ececec;
+    z-index: 1;
 }
 .card{
     height: 150px;
@@ -185,12 +224,8 @@ a{
 .card-title{
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 1rem;
     color: var(--main-background);
-}
-.form-game-container i{
-    font-size: 30px;
-    color: var(--main-color) !important;
 }
 .form-game-container .form{
     margin-bottom: 15px;
@@ -403,10 +438,7 @@ button{
     .form-game-container:after{
         right: 810px !important;
     }
-    .form-game-container{
-        padding: 1% 2% 2%;
-        zoom: .9;
-    }
+
     .cover-bg{
         background-position-x: 66% !important;
     }
@@ -417,9 +449,6 @@ button{
     }
     .col-lg-8{
         width: 58.33333333% !important;
-    }
-    .form-game-container{
-        zoom: .7;
     }
 
     .logo-cover{
@@ -456,13 +485,6 @@ button{
     .col-lg-8{
         display: none;
     }
-    .logo-event{
-        display: block !important;
-    }
-    .logo-event img{
-        margin: 0 auto;
-        display: block;
-    }
 
     .logo-cover{
         display: none;
@@ -470,13 +492,17 @@ button{
 
     .form-game-container{
         padding: 20px;
-        height: 135vh;
     }
 
     .gameTitle i{
         display: none !important;
     }
+
+    .form-game-container{
+        background-image: none !important;
+    }
 }
+
  @media screen and (max-width:578px){
     .card-title{
         font-size:10px;
@@ -606,44 +632,36 @@ input::placeholder, textarea::placeholder{
 }
 .btn-acesso-leads{
     width: 100%;
-    background: #00000000 !important;
-    border: solid 3px var(--main-color) !important;
+    background: #fff !important;
+    border: none !important;
 }
 .btn-acesso-leads:hover{
-    background: #00000000 !important;
-    border: solid 3px var(--main-color) !important;
+    background: #ffffffb2 !important;
+    border: none !important;
 }
 .btn-ranking{
     width: 100%;
-    background: #00000000 !important;
-    border: solid 3px #ff5600 !important;
+    background: #fff !important;
+    border: none !important;
 }
 .btn-ranking:hover{
-    background: #00000000 !important;
-    border: solid 3px #ff5600 !important;
+    background: #ffffffb2 !important;
+    border: none !important;
 }
 .card-dealer-area{
     display: flex;
     flex-direction: row;
 }
-.card-dealer-area i{
-    padding-right: 15px;
-    font-size: 38px;
-}
-.card-dealer-area h2{
-    color: #ff5600 !important;
-}
-.card-dealer-area i{
-    color: #0828fd;
-}
+
 .dealer-area span{
     background: var(--main-color);
     color: var(--main-background);
-    border-radius: 5px;
-    padding: 2px 10px;
+    border-radius: 15px;
+    padding: 2px 15px;
     position: absolute;
-    right: 20px;
-    top: 23px;
+    font-weight: 600;
+    right: 13px;
+    top: 27px;
 }
 @media (min-width:1601px){
     .dealer-area{
@@ -667,10 +685,10 @@ input::placeholder, textarea::placeholder{
         padding-bottom: 0 !important;
     }
     .dealer-area{
-        padding: 20px 5px !important;
+        padding: 40px  0px 20px  !important;
     }
     .card-dealer-area .card-title{
-        font-size: 10px !important;
+        font-size: .824rem !important;
     }
     .card-dealer-area i {
         padding-right: 15px;
@@ -680,19 +698,14 @@ input::placeholder, textarea::placeholder{
         font-size: 12px;
     }
     .dealer-area span{
-        top: -15px !important;
+        top: -10px !important;
+        font-size: .725rem;
     }
     .simplecard-button .h2{
         font-size: 10px !important;
     }
-    #totalPontuacao{
-        font-size: 57px;
-    }
     .dealer-area{
         background: #16161600 !important;
-    }
-    .form-game-container i{
-        font-size: 15px;
     }
 }
 .cover-img{
@@ -749,16 +762,16 @@ input::placeholder, textarea::placeholder{
 .padding-15{
     padding: 15px 0;
 }
-.text-blue{
-    color: #0828fd !important;
-}
+
 .text-orange{
     color: #ff5600 !important;
 }
+
 button:active{
     transform: scale(0.9); /* Diminui ligeiramente o tamanho */
-    filter: brightness(0.9); /* Escurece para simular profundidade */
 }
 .btn-agendar{
     background: linear-gradient(121deg, rgb(241 62 0) 8%, rgb(255 109 0) 100%) !important;
+    border: none !important;
 }
+
